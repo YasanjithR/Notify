@@ -1,0 +1,17 @@
+/* index.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+body{
+  background-color: black;
+}
+
+.gradient-radial {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 40%);
+}
+
+
+
+
