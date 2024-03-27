@@ -5,9 +5,9 @@ const NoteCard = ({ onClick }) => {
         {/* <!-- First card --> */}
         <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
           {/* <!-- Your NoteCard component or template goes here --> */}
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-2">Note Title 1</h2>
-            <p class="text-gray-600 mb-4">
+          <div class="bg-note-gradient rounded-lg shadow-md p-6" >
+            <h2 class="text-xl font-semibold mb-2 text-white">Note Title 1</h2>
+            <p class="text-gray-600 mb-4 ">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
               facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien
               tempor.
@@ -25,8 +25,8 @@ const NoteCard = ({ onClick }) => {
         {/* <!-- Second card --> */}
         <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
           {/* <!-- Your NoteCard component or template goes here --> */}
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-2">Note Title 2</h2>
+          <div class=" rounded-lg shadow-md p-6 bg-note-gradient">
+            <h2 class="text-xl font-semibold mb-2 text-white">Note Title 2</h2>
             <p class="text-gray-600 mb-4">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
               facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien
@@ -45,8 +45,8 @@ const NoteCard = ({ onClick }) => {
         {/* <!-- Third card --> */}
         <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
           {/* <!-- Your NoteCard component or template goes here --> */}
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-2">Note Title 3</h2>
+          <div class="bg-note-gradient rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-2 text-white">Note Title 3</h2>
             <p class="text-gray-600 mb-4">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
               facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien
@@ -65,29 +65,8 @@ const NoteCard = ({ onClick }) => {
         {/* <!-- Fourth card --> */}
         <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
           {/* <!-- Your NoteCard component or template goes here --> */}
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-2">Note Title 4</h2>
-            <p class="text-gray-600 mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien
-              tempor.
-            </p>
-            <div class="flex justify-end">
-              <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2">
-                Delete
-              </button>
-              <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                Update
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* <!-- Fourth card --> */}
-        <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
-          {/* <!-- Your NoteCard component or template goes here --> */}
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-2">Note Title 4</h2>
+          <div class="bg-note-gradient rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-2 text-white">Note Title 4</h2>
             <p class="text-gray-600 mb-4">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
               facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien
@@ -107,8 +86,8 @@ const NoteCard = ({ onClick }) => {
         {/* <!-- Fourth card --> */}
         <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
           {/* <!-- Your NoteCard component or template goes here --> */}
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-2">Note Title 4</h2>
+          <div class="bg-note-gradient rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-2 text-white">Note Title 4</h2>
             <p class="text-gray-600 mb-4">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
               facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien
@@ -128,8 +107,29 @@ const NoteCard = ({ onClick }) => {
         {/* <!-- Fourth card --> */}
         <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
           {/* <!-- Your NoteCard component or template goes here --> */}
-          <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-2">Note Title 4</h2>
+          <div class="bg-note-gradient rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-2 text-white">Note Title 4</h2>
+            <p class="text-gray-600 mb-4">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+              facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien
+              tempor.
+            </p>
+            <div class="flex justify-end">
+              <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2">
+                Delete
+              </button>
+              <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* <!-- Fourth card --> */}
+        <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
+          {/* <!-- Your NoteCard component or template goes here --> */}
+          <div class="bg-note-gradient rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-2 text-white">Note Title 4</h2>
             <p class="text-gray-600 mb-4">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
               facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien

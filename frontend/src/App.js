@@ -2,6 +2,7 @@
 import './index.css';
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import Home from './pages/Home'
+import Preloader from './pages/Preloader';
 function App() {
   return (
     <div className="App">
@@ -12,7 +13,7 @@ function App() {
             <Route
             
             path="/"
-            element={<Home />}
+            element={<Preloader/>}
             
             />
           </Routes>

@@ -2,15 +2,62 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 body{
-  background-color: black;
+ 
+  font-family: "Manrope", sans-serif;
+  background-image: linear-gradient(to right, #0d0e0f, #131313);
+
+  
 }
 
-.gradient-radial {
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 40%);
+.bg-back-gradient {
+  background-image: linear-gradient(to right, #0d0e0f, #131313);
 }
+.bg-note-gradient {
+  background-image: linear-gradient(to right, #1d2d3b5c, #ffffff3b);
+}
+
+.cursor {
+  width: 6px;
+  height: 4rem; /* Adjust height as needed */
+  background-color: white;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.typing {
+  color: white; /* Change typing color to white */
+  font-size: 48px; /* Increase font size */
+}
+
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 4px; /* Adjust width to match cursor width */
+  }
+  100% {
+    width: 0;
+  }
+}
+/* .gradient-radial {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 100%);
+} */
 
 
 
