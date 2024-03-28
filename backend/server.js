@@ -33,9 +33,9 @@ connection.once("open", ()=>{
 
 const createDefaultCategory = async () => {
     try {
-      const existingCategory = await Category.findOne({ catName: 'Uncategorized' ,colorID :'#234234234'});
+      const existingCategory = await Category.findOne({ catName: 'Uncategorized' ,colorID :'#949494'});
       if (!existingCategory) {
-        const defaultCategory = await Category.create({ catName: 'Uncategorized',colorID :'#234234234' });
+        const defaultCategory = await Category.create({ catName: 'Uncategorized',colorID :'#949494' });
         console.log('Default category created:', defaultCategory);
       } else {
         console.log('Default category already exists:', existingCategory);

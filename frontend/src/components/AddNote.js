@@ -1,23 +1,70 @@
 // NoteFormPopup.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const AddNote = ({ show, onClose, onCreateNote }) => {
+ 
+
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [title, setTitle] = useState(''); // Define title state
+  const [content, setContent] = useState(''); // Define content state
+
+
+  useEffect(() => {
+
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('http://localhost:8070/category');
+        setCategories(response.data);
+      } catch (error) {
+        console.error('Error fetching categories:', error.message);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+
+  const handleCreateNote = () => {
+    if (!title.trim() || !content.trim() || !selectedCategory) {
+      alert('Please enter title, content, and select a category.');
+      return;
+    }
+    console.log(selectedCategory)
+
+    onCreateNote({
+      title,
+      content,
+      category: selectedCategory
+    });
+    console.log('teest')
+
+    // Clear form fields
+    setTitle('');
+    setContent('');
+    setSelectedCategory('');
+    onClose();
+  };
+
   if (!show) return null;
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
       <div className="bg-white rounded-lg p-6 w-full sm:w-96">
-        {/* Form for creating a new note */}
+    
         <h2 className="text-xl font-semibold mb-4">Create New Note</h2>
         <div className="mb-4">
           <label htmlFor="noteTitle" className="block text-sm font-medium">
             Note Title
           </label>
           <input
-            type="text"
-            id="noteTitle"
-            className="w-full border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-300"
-            placeholder="Enter note title"
+           type="text"
+           id="noteTitle"
+           value={title} // Use the title state
+           onChange={(e) => setTitle(e.target.value)} // Update title state
+           className="w-full border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-300"
+           placeholder="Enter note title"
           />
         </div>
         <div className="mb-4">
@@ -26,6 +73,8 @@ const AddNote = ({ show, onClose, onCreateNote }) => {
           </label>
           <textarea
             id="noteContent"
+            value={content} // Use the content state
+            onChange={(e) => setContent(e.target.value)} // Update content state
             className="w-full border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-300"
             rows="3"
             placeholder="Enter note content"
@@ -37,18 +86,21 @@ const AddNote = ({ show, onClose, onCreateNote }) => {
           </label>
           <select
             id="category"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
             className="w-full border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-300"
           >
-            {/* Options for category selection */}
             <option value="">Select category...</option>
-            <option value="work">Work</option>
-            <option value="personal">Personal</option>
-            <option value="other">Other</option>
+            {categories.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.catName}
+              </option>
+            ))}
           </select>
         </div>
         <div className="flex justify-end">
           <button
-            onClick={onCreateNote}
+            onClick={handleCreateNote}
             className="bg-blue-500 text-white px-4 py-2 rounded mr-2 hover:bg-blue-600"
           >
             Create Note

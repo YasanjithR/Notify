@@ -7,17 +7,18 @@
 body{
  
   font-family: "Manrope", sans-serif;
-  background-image: linear-gradient(to right, #0d0e0f, #131313);
+  background-image: url('../src/assets/bg-image.jpg')
 
   
 }
 
 .bg-back-gradient {
-  background-image: linear-gradient(to right, #0d0e0f, #131313);
+  background-image: url('../src/assets/bg-image.jpg')
 }
 .bg-note-gradient {
   background-image: linear-gradient(to right, #1d2d3b5c, #ffffff3b);
 }
+
 
 .cursor {
   width: 6px;

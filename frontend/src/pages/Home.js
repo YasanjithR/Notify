@@ -1,78 +1,95 @@
-import AddButton from '../components/AddButton'
-import Search from '../components/Search'
-import NoteCard from '../components/NoteCard'
-import AddNote from '../components/AddNote'
-import UpdateNote from '../components/UpdateNote'
-import CategoryFilter from '../components/Filter'
-import AddCategoryPopup from '../components/AddCategory'
-import React, { useState } from 'react';
+import AddButton from "../components/AddButton";
+import Search from "../components/Search";
+import NoteCard from "../components/NoteCard";
+import AddNote from "../components/AddNote";
+import UpdateNote from "../components/UpdateNote";
+import CategoryFilter from "../components/Filter";
+import AddCategoryPopup from "../components/AddCategory";
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Home = () => {
   const [showAddPopUp, setShowAddPopUp] = useState(false); // State for Add Note pop-up
   const [showUpdatePopup, setShowUpdatePopup] = useState(false); // State for Update Note pop-up
   const [showAddCatPopup, setAddShowCatPopup] = useState(false);
+  const [redirectHome, setRedirectHome] = useState(false);
+  const [noteId, setNoteId] = useState(null);
+  const navigate = useNavigate();
 
-  const categories = [
-    { name: 'Work', color: 'bg-blue-500' },
-    { name: 'Personal', color: 'bg-green-500' },
-    { name: 'Other', color: 'bg-yellow-500' }
-  ];
-
-  const handleAddCategory = (category) => {
-    // Logic to add the new category
-    console.log('New category:', category);
+  const handleAddCategory = async (newCategory) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8070/category/new",
+        newCategory
+      );
+      alert("New category created");
+      setRedirectHome(true);
+      setAddShowCatPopup(false);
+      setRedirectHome(true);
+    } catch (error) {
+      console.error("Error category note:", error.message);
+    }
   };
 
   const handleFilter = (categoryName) => {
-    // Implement filtering logic here
+
     console.log(`Filter notes by category: ${categoryName}`);
   };
 
-  const handleUpdateNote = () => {
-    // Logic to update the note
-    // You can send the updated note data to your backend or perform any other actions
-    console.log("Updating note...");
-    setShowUpdatePopup(false); // Close the update pop-up after updating the note
+  const handleUpdateNote = (noteId) => {
+    setShowUpdatePopup(true);
+    setNoteId(noteId); 
   };
 
-  const handleCreateNote = () => {
-    // Logic to create a new note
-    // You can send the note data to your backend or perform any other actions
-    console.log("Creating note...");
-    setShowAddPopUp(false); // Close the pop-up after creating the note
+  const handleCreateNote = async (newNoteData) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8070/note/new",
+        newNoteData
+      );
+      alert("New note created");
+    } catch (error) {
+      console.error("Error creating note:", error.message);
+    }
   };
 
+  useEffect(() => {
+    if (redirectHome) {
+      navigate("/"); 
+    }
+  }, [redirectHome, navigate]);
 
-
-
-  return ( 
+  return (
     <>
-
-
       <AddButton onClick={() => setShowAddPopUp(true)} />
       <AddNote
         show={showAddPopUp}
         onClose={() => setShowAddPopUp(false)}
+        onCreateNote={handleCreateNote}
       />
-      <UpdateNote
-        show={showUpdatePopup}
-        onClose={() => setShowUpdatePopup(false)}
-      />
+      {noteId && (
+        <UpdateNote
+          show={true}
+          onClose={() => setNoteId(null)}
+          onUpdateNote={handleUpdateNote}
+          noteId={noteId}
+        />
+      )}
+
       <Search />
-      <CategoryFilter categories={categories} 
-      onClick={() => setAddShowCatPopup(true)}
-     />
-     
-      
-      <NoteCard  onClick={() => setShowUpdatePopup(true)}/>
+      <CategoryFilter onClick={() => setAddShowCatPopup(true)} />
+
+      <NoteCard onClick={handleUpdateNote} />
 
       <AddCategoryPopup
         show={showAddCatPopup}
-      onClose={() => setAddShowCatPopup(false)}
+        onClose={() => setAddShowCatPopup(false)}
         onAddCategory={handleAddCategory}
       />
     </>
   );
-}
+};
 
 export default Home;

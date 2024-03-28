@@ -1,13 +1,54 @@
-// UpdateNotePopup.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const UpdateNote = ({ show, onClose, onUpdateNote }) => {
+const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
+  const [noteDetails, setNoteDetails] = useState({
+    title: '',
+    content: '',
+    category: '',
+  });
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchNoteDetails = async () => {
+      try {
+        const [noteResponse, categoriesResponse] = await Promise.all([
+          axios.get(`http://localhost:8070/note/${noteId}`),
+          axios.get(`http://localhost:8070/category`),
+        ]);
+        setNoteDetails(noteResponse.data);
+        setCategories(categoriesResponse.data);
+      } catch (error) {
+        console.error('Error fetching note details:', error);
+      }
+    };
+
+    fetchNoteDetails();
+  }, [noteId]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNoteDetails({
+      ...noteDetails,
+      [name]: value,
+    });
+  };
+
+  const handleUpdateNote = async () => {
+    try {
+      await axios.patch(`http://localhost:8070/note/update/${noteId}`, noteDetails);
+      onUpdateNote(); 
+      onClose(); 
+    } catch (error) {
+      console.error('Error updating note:', error);
+    }
+  };
+
   if (!show) return null;
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
       <div className="bg-white rounded-lg p-6 w-full sm:w-96">
-        {/* Form for updating a note */}
         <h2 className="text-xl font-semibold mb-4">Update Note</h2>
         <div className="mb-4">
           <label htmlFor="updateNoteTitle" className="block text-sm font-medium">
@@ -16,6 +57,9 @@ const UpdateNote = ({ show, onClose, onUpdateNote }) => {
           <input
             type="text"
             id="updateNoteTitle"
+            name="title"
+            value={noteDetails.title}
+            onChange={handleInputChange}
             className="w-full border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-300"
             placeholder="Enter updated note title"
           />
@@ -26,6 +70,9 @@ const UpdateNote = ({ show, onClose, onUpdateNote }) => {
           </label>
           <textarea
             id="updateNoteContent"
+            name="content"
+            value={noteDetails.content}
+            onChange={handleInputChange}
             className="w-full border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-300"
             rows="3"
             placeholder="Enter updated note content"
@@ -37,18 +84,23 @@ const UpdateNote = ({ show, onClose, onUpdateNote }) => {
           </label>
           <select
             id="category"
+            name="category"
+            value={noteDetails.category}
+            onChange={handleInputChange}
             className="w-full border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-300"
           >
             {/* Options for category selection */}
             <option value="">Select category...</option>
-            <option value="work">Work</option>
-            <option value="personal">Personal</option>
-            <option value="other">Other</option>
+            {categories.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.catName}
+              </option>
+            ))}
           </select>
         </div>
         <div className="flex justify-end">
           <button
-            onClick={onUpdateNote}
+            onClick={handleUpdateNote}
             className="bg-blue-500 text-white px-4 py-2 rounded mr-2 hover:bg-blue-600"
           >
             Update Note

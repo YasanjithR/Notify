@@ -1,153 +1,56 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 const NoteCard = ({ onClick }) => {
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    const fetchNotes = async () => {
+      try {
+        const response = await axios.get('http://localhost:8070/note');
+        setNotes(response.data);
+      } catch (error) {
+        console.error('Error fetching notes:', error);
+      }
+    };
+
+    fetchNotes();
+  }, []);
+
+  const handleDelete = async (noteId) => {
+    try {
+      await axios.delete(`http://localhost:8070/note/delete/${noteId}`);
+
+      setNotes(notes.filter(note => note._id !== noteId));
+      console.log('Note deleted successfully');
+    } catch (error) {
+      console.error('Error deleting note:', error);
+    }
+  };
+
+
   return (
     <div className="container mx-auto p-5 notes-main">
-      <div class="flex flex-wrap -mx-4">
-        {/* <!-- First card --> */}
-        <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
-          {/* <!-- Your NoteCard component or template goes here --> */}
-          <div class="bg-note-gradient rounded-lg shadow-md p-6" >
-            <h2 class="text-xl font-semibold mb-2 text-white">Note Title 1</h2>
-            <p class="text-gray-600 mb-4 ">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien
-              tempor.
-            </p>
-            <div class="flex justify-end">
-              <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2">
-                Delete
-              </button>
-              <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"  onClick={onClick} >
-                Update
-              </button>
+      <div className="flex flex-wrap -mx-4">
+        {notes.map((note) => (
+          <div key={note._id} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
+            <div className="bg-note-gradient rounded-lg shadow-md p-6">
+              <h2 className="text-xl font-semibold mb-2 text-white">{note.title}</h2>
+              <p className="text-gray-600 mb-4">{note.content}</p>
+              <div className="flex justify-end">
+                <button className="bg-note-gradient hover:bg-black text-white font-bold py-2 px-4 rounded mr-2 border border-red-500" onClick={() => handleDelete(note._id)} >
+                  Delete
+                </button>
+                <button className="bg-note-gradient hover:bg-black text-white font-bold py-2 px-4 rounded border border-blue-500" onClick={() => onClick(note._id)}>
+                  Update
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        {/* <!-- Second card --> */}
-        <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
-          {/* <!-- Your NoteCard component or template goes here --> */}
-          <div class=" rounded-lg shadow-md p-6 bg-note-gradient">
-            <h2 class="text-xl font-semibold mb-2 text-white">Note Title 2</h2>
-            <p class="text-gray-600 mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien
-              tempor.
-            </p>
-            <div class="flex justify-end">
-              <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2">
-                Delete
-              </button>
-              <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                Update
-              </button>
-            </div>
-          </div>
-        </div>
-        {/* <!-- Third card --> */}
-        <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
-          {/* <!-- Your NoteCard component or template goes here --> */}
-          <div class="bg-note-gradient rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-2 text-white">Note Title 3</h2>
-            <p class="text-gray-600 mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien
-              tempor.
-            </p>
-            <div class="flex justify-end">
-              <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2">
-                Delete
-              </button>
-              <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                Update
-              </button>
-            </div>
-          </div>
-        </div>
-        {/* <!-- Fourth card --> */}
-        <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
-          {/* <!-- Your NoteCard component or template goes here --> */}
-          <div class="bg-note-gradient rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-2 text-white">Note Title 4</h2>
-            <p class="text-gray-600 mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien
-              tempor.
-            </p>
-            <div class="flex justify-end">
-              <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2">
-                Delete
-              </button>
-              <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                Update
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* <!-- Fourth card --> */}
-        <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
-          {/* <!-- Your NoteCard component or template goes here --> */}
-          <div class="bg-note-gradient rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-2 text-white">Note Title 4</h2>
-            <p class="text-gray-600 mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien
-              tempor.
-            </p>
-            <div class="flex justify-end">
-              <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2">
-                Delete
-              </button>
-              <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                Update
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* <!-- Fourth card --> */}
-        <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
-          {/* <!-- Your NoteCard component or template goes here --> */}
-          <div class="bg-note-gradient rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-2 text-white">Note Title 4</h2>
-            <p class="text-gray-600 mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien
-              tempor.
-            </p>
-            <div class="flex justify-end">
-              <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2">
-                Delete
-              </button>
-              <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                Update
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* <!-- Fourth card --> */}
-        <div class="w-full sm:w-1/2 lg:w-1/3 px-4 mb-4">
-          {/* <!-- Your NoteCard component or template goes here --> */}
-          <div class="bg-note-gradient rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-2 text-white">Note Title 4</h2>
-            <p class="text-gray-600 mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              facilisi. Sed auctor felis nec mi laoreet, at hendrerit sapien
-              tempor.
-            </p>
-            <div class="flex justify-end">
-              <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mr-2">
-                Delete
-              </button>
-              <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" onClick={onClick}>
-                Update
-              </button>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
 };
 
-export default NoteCard
+export default NoteCard;
