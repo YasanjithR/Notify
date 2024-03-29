@@ -3,6 +3,8 @@ A notes app using MERN stack and tailwind CSS
 
 ## Setup Instructions
 
+Clone the repositeries
+
 01. Install dependencies:
 
 ```bashc
