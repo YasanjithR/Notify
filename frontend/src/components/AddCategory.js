@@ -1,45 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const AddCategoryPopup = ({ show, onClose, onAddCategory }) => {
-  const [categoryName, setCategoryName] = useState('');
-  const [color, setColor] = useState('#000000'); 
+  const [categoryName, setCategoryName] = useState("");
+  const [color, setColor] = useState("#000000");
 
   const handleAddCategory = () => {
-
     if (!categoryName.trim()) {
-      alert('Please enter a category name.');
+      alert("Please enter a category name.");
       return;
     }
-
-    // Check if the color value is a valid hexadecimal color code
+    //check if hex color
     const hexColorRegex = /^#[0-9A-F]{6}$/i;
     if (!hexColorRegex.test(color)) {
-      alert('Please enter a valid hexadecimal color code.');
+      alert("Please enter a valid hexadecimal color code.");
       return;
     }
-
-  
     const newCategory = {
       catName: categoryName,
-      colorID: color
+      colorID: color,
     };
 
-   
     onAddCategory(newCategory);
 
-   
-    setCategoryName('');
-    setColor('#000000'); 
+    setCategoryName("");
+    setColor("#000000");
   };
 
   return (
-    <div className={`fixed inset-0 flex items-center justify-center z-50 ${show ? '' : 'hidden'}`}>
+    <div
+      className={`fixed inset-0 flex items-center justify-center z-50 ${
+        show ? "" : "hidden"
+      }`}
+    >
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="relative bg-pop-gradient rounded-lg shadow-lg p-6 max-w-sm w-full">
-        <h2 className="text-lg font-semibold mb-4 text-white">Add New Category</h2>
+        <h2 className="text-lg font-semibold mb-4 text-white">
+          Add New Category
+        </h2>
         <form>
           <div className="mb-4">
-            <label htmlFor="categoryName" className="block text-sm font-medium text-white">
+            <label
+              htmlFor="categoryName"
+              className="block text-sm font-medium text-white"
+            >
               Category Name
             </label>
             <input
@@ -52,7 +55,10 @@ const AddCategoryPopup = ({ show, onClose, onAddCategory }) => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="color" className="block text-sm font-medium text-white">
+            <label
+              htmlFor="color"
+              className="block text-sm font-medium text-white"
+            >
               Color
             </label>
             <input

@@ -1,6 +1,4 @@
-// Preloader.js
 import React, { useState, useEffect, useRef } from 'react';
-
 
 const words = ['welcome', 'to', 'notefy'];
 
@@ -20,6 +18,9 @@ const Preloader = () => {
         } else {
           clearInterval(typingInterval);
           cursorRef.current.style.visibility = 'visible';
+          setTimeout(() => {
+            window.location.href = '/home'; // Redirect to home page after 5 seconds
+          }, 5000); // 5 seconds delay before redirecting
           return currentCharIndex;
         }
       });
@@ -41,7 +42,7 @@ const Preloader = () => {
   ).join(' ');
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="preloader-container">
       <div className="typing">{text}</div>
       <div className="cursor" ref={cursorRef}></div>
     </div>

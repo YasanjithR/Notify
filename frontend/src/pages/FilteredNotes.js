@@ -1,30 +1,29 @@
 import AddButton from "../components/AddButton";
-import Search from "../components/Search";
-import NoteCard from "../components/NoteCard";
+import Logo from "../components/Logo";
 import AddNote from "../components/AddNote";
 import UpdateNote from "../components/UpdateNote";
 import CategoryFilter from "../components/Filter";
 import AddCategoryPopup from "../components/AddCategory";
 import FilteredNoteCard from "../components/FilteredNoteCard";
+import HomeButton from "../components/HomeButton";
+
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const FilteredNotes = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [showAddPopUp, setShowAddPopUp] = useState(false); // State for Add Note pop-up
-  const [showUpdatePopup, setShowUpdatePopup] = useState(false); // State for Update Note pop-up
+  const [showAddPopUp, setShowAddPopUp] = useState(false);
+  const [showUpdatePopup, setShowUpdatePopup] = useState(false);
   const [showAddCatPopup, setAddShowCatPopup] = useState(false);
   const [redirectHome, setRedirectHome] = useState(false);
   const [noteId, setNoteId] = useState(null);
-  
+
   const navigate = useNavigate();
 
   const handleCategorySelect = (categoryId) => {
     setSelectedCategory(categoryId);
   };
-
 
   const handleAddCategory = async (newCategory) => {
     try {
@@ -32,23 +31,18 @@ const FilteredNotes = () => {
         "http://localhost:8070/category/new",
         newCategory
       );
+
       alert("New category created");
-      setRedirectHome(true);
       setAddShowCatPopup(false);
-      setRedirectHome(true);
+      navigate("/home");
     } catch (error) {
       console.error("Error category note:", error.message);
     }
   };
 
-  const handleFilter = (categoryName) => {
-
-    console.log(`Filter notes by category: ${categoryName}`);
-  };
-
   const handleUpdateNote = (noteId) => {
     setShowUpdatePopup(true);
-    setNoteId(noteId); 
+    setNoteId(noteId);
   };
 
   const handleCreateNote = async (newNoteData) => {
@@ -57,26 +51,26 @@ const FilteredNotes = () => {
         "http://localhost:8070/note/new",
         newNoteData
       );
+
       alert("New note created");
+      navigate("/home");
     } catch (error) {
       console.error("Error creating note:", error.message);
     }
   };
 
-  useEffect(() => {
-    if (redirectHome) {
-      navigate("/"); 
-    }
-  }, [redirectHome, navigate]);
-
   return (
     <>
-      <AddButton onClick={() => setShowAddPopUp(true)} />
+      <AddButton onClick={() => setShowAddPopUp(true)} />  
+
+      <HomeButton />
+
       <AddNote
         show={showAddPopUp}
         onClose={() => setShowAddPopUp(false)}
         onCreateNote={handleCreateNote}
       />
+
       {noteId && (
         <UpdateNote
           show={true}
@@ -86,10 +80,17 @@ const FilteredNotes = () => {
         />
       )}
 
-      <Search />
-      <CategoryFilter onClick={() => setAddShowCatPopup(true)}  onCategorySelect={handleCategorySelect}/>
+      <Logo />
 
-      <FilteredNoteCard onClick={handleUpdateNote} selectedCategory={selectedCategory}/>
+      <CategoryFilter
+        onClick={() => setAddShowCatPopup(true)}
+        onCategorySelect={handleCategorySelect}
+      />
+
+      <FilteredNoteCard
+        onClick={handleUpdateNote}
+        selectedCategory={selectedCategory}
+      />
 
       <AddCategoryPopup
         show={showAddCatPopup}

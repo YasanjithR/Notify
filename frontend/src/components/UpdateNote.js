@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+const navigate = useNavigate;
 
 const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
   const [noteDetails, setNoteDetails] = useState({
-    title: '',
-    content: '',
-    category: '',
+    title: "",
+    content: "",
+    category: "",
   });
   const [categories, setCategories] = useState([]);
 
@@ -19,7 +21,7 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
         setNoteDetails(noteResponse.data);
         setCategories(categoriesResponse.data);
       } catch (error) {
-        console.error('Error fetching note details:', error);
+        console.error("Error fetching note details:", error);
       }
     };
 
@@ -36,11 +38,15 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
 
   const handleUpdateNote = async () => {
     try {
-      await axios.patch(`http://localhost:8070/note/update/${noteId}`, noteDetails);
-      onUpdateNote(); 
-      onClose(); 
+      await axios.patch(
+        `http://localhost:8070/note/update/${noteId}`,
+        noteDetails
+      );
+      onUpdateNote();
+      window.location.reload();
+      onClose();
     } catch (error) {
-      console.error('Error updating note:', error);
+      console.error("Error updating note:", error);
     }
   };
 
@@ -51,7 +57,10 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
       <div className="bg-pop-gradient rounded-lg p-6 w-full sm:w-96">
         <h2 className="text-xl font-semibold mb-4 text-white">Update Note</h2>
         <div className="mb-4">
-          <label htmlFor="updateNoteTitle" className="block text-sm font-medium text-white">
+          <label
+            htmlFor="updateNoteTitle"
+            className="block text-sm font-medium text-white"
+          >
             Note Title
           </label>
           <input
@@ -65,7 +74,10 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="updateNoteContent" className="block text-sm font-medium text-white">
+          <label
+            htmlFor="updateNoteContent"
+            className="block text-sm font-medium text-white"
+          >
             Note Content
           </label>
           <textarea
@@ -79,7 +91,10 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
           ></textarea>
         </div>
         <div className="mb-4">
-          <label htmlFor="category" className="block text-sm font-medium text-white">
+          <label
+            htmlFor="category"
+            className="block text-sm font-medium text-white"
+          >
             Category
           </label>
           <select
@@ -89,7 +104,6 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
             onChange={handleInputChange}
             className="w-full border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:border-blue-300"
           >
-            {/* Options for category selection */}
             <option value="">Select category...</option>
             {categories.map((category) => (
               <option key={category._id} value={category._id}>
@@ -105,6 +119,7 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
           >
             Update Note
           </button>
+
           <button
             onClick={onClose}
             className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
