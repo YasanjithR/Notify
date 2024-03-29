@@ -1,29 +1,52 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 const AddCategoryPopup = ({ show, onClose, onAddCategory }) => {
   const [categoryName, setCategoryName] = useState("");
   const [color, setColor] = useState("#000000");
 
   const handleAddCategory = () => {
-    if (!categoryName.trim()) {
-      alert("Please enter a category name.");
-      return;
-    }
-    //check if hex color
-    const hexColorRegex = /^#[0-9A-F]{6}$/i;
-    if (!hexColorRegex.test(color)) {
-      alert("Please enter a valid hexadecimal color code.");
-      return;
-    }
-    const newCategory = {
-      catName: categoryName,
-      colorID: color,
-    };
+    try {
+      if (!categoryName.trim()) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Please fill in all fields!",
+        });
+        return;
+      }
+      //check if hex color
+      const hexColorRegex = /^#[0-9A-F]{6}$/i;
+      if (!hexColorRegex.test(color)) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Please put valid color values",
+        });
+        return;
+      }
+      const newCategory = {
+        catName: categoryName,
+        colorID: color,
+      };
 
-    onAddCategory(newCategory);
-
-    setCategoryName("");
-    setColor("#000000");
+      onAddCategory(newCategory);
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Catetory added succesfully",
+        confirmButtonText: "OK",
+      });
+      setCategoryName("");
+      setColor("#000000");
+    } catch (error) {
+      console.error("Error Creating category:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to create category. Please try again later.",
+      });
+    }
   };
 
   return (

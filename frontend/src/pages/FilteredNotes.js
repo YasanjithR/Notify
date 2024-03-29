@@ -32,7 +32,7 @@ const FilteredNotes = () => {
         newCategory
       );
 
-      alert("New category created");
+   
       setAddShowCatPopup(false);
       navigate("/home");
     } catch (error) {
@@ -51,8 +51,6 @@ const FilteredNotes = () => {
         "http://localhost:8070/note/new",
         newNoteData
       );
-
-      alert("New note created");
       navigate("/home");
     } catch (error) {
       console.error("Error creating note:", error.message);

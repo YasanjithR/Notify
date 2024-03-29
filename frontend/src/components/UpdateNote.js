@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 const navigate = useNavigate;
 
 const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
@@ -37,6 +38,15 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
   };
 
   const handleUpdateNote = async () => {
+    if (!noteDetails.title || !noteDetails.content) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please fill in all fields!",
+      });
+      return;
+    }
+
     try {
       await axios.patch(
         `http://localhost:8070/note/update/${noteId}`,
@@ -45,8 +55,19 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
       onUpdateNote();
       window.location.reload();
       onClose();
+
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Note updated successfully.",
+      });
     } catch (error) {
       console.error("Error updating note:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to update note. Please try again later.",
+      });
     }
   };
 

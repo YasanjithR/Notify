@@ -27,7 +27,6 @@ const Home = () => {
         "http://localhost:8070/category/new",
         newCategory
       );
-      alert("New category created");
       setAddShowCatPopup(false);
       window.location.reload();
     } catch (error) {
@@ -50,7 +49,6 @@ const Home = () => {
         "http://localhost:8070/note/new",
         newNoteData
       );
-      alert("New note created");
       window.location.reload();
     } catch (error) {
       console.error("Error creating note:", error.message);

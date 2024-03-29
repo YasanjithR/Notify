@@ -1,6 +1,7 @@
 // NoteFormPopup.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddNote = ({ show, onClose, onCreateNote }) => {
   const [categories, setCategories] = useState([]);
@@ -22,22 +23,41 @@ const AddNote = ({ show, onClose, onCreateNote }) => {
   }, []);
 
   const handleCreateNote = () => {
-    if (!title.trim() || !content.trim() || !selectedCategory) {
-      alert("Please enter title, content, and select a category.");
-      return;
+    try {
+      if (!title.trim() || !content.trim() || !selectedCategory) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Please fill in all fields!",
+        });
+        return;
+      }
+
+      onCreateNote({
+        title,
+        content,
+        category: selectedCategory,
+      });
+
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Note created succesfully",
+        confirmButtonText: "OK",
+      });
+
+      setTitle("");
+      setContent("");
+      setSelectedCategory("");
+      onClose();
+    } catch (error) {
+      console.error("Error Creating Note:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to create note. Please try again later.",
+      });
     }
-    console.log(selectedCategory);
-
-    onCreateNote({
-      title,
-      content,
-      category: selectedCategory,
-    });
-
-    setTitle("");
-    setContent("");
-    setSelectedCategory("");
-    onClose();
   };
 
   if (!show) return null;
