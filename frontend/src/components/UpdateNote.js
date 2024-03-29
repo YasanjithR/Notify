@@ -48,10 +48,10 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div className="bg-white rounded-lg p-6 w-full sm:w-96">
-        <h2 className="text-xl font-semibold mb-4">Update Note</h2>
+      <div className="bg-pop-gradient rounded-lg p-6 w-full sm:w-96">
+        <h2 className="text-xl font-semibold mb-4 text-white">Update Note</h2>
         <div className="mb-4">
-          <label htmlFor="updateNoteTitle" className="block text-sm font-medium">
+          <label htmlFor="updateNoteTitle" className="block text-sm font-medium text-white">
             Note Title
           </label>
           <input
@@ -65,7 +65,7 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="updateNoteContent" className="block text-sm font-medium">
+          <label htmlFor="updateNoteContent" className="block text-sm font-medium text-white">
             Note Content
           </label>
           <textarea
@@ -79,7 +79,7 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
           ></textarea>
         </div>
         <div className="mb-4">
-          <label htmlFor="category" className="block text-sm font-medium">
+          <label htmlFor="category" className="block text-sm font-medium text-white">
             Category
           </label>
           <select
@@ -101,7 +101,7 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
         <div className="flex justify-end">
           <button
             onClick={handleUpdateNote}
-            className="bg-blue-500 text-white px-4 py-2 rounded mr-2 hover:bg-blue-600"
+            className="bg-note-gradient text-white px-4 py-2 rounded mr-2 hover:bg-black border border-blue-500"
           >
             Update Note
           </button>

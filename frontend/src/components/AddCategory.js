@@ -5,7 +5,7 @@ const AddCategoryPopup = ({ show, onClose, onAddCategory }) => {
   const [color, setColor] = useState('#000000'); 
 
   const handleAddCategory = () => {
-    // Check if category name is not empty
+
     if (!categoryName.trim()) {
       alert('Please enter a category name.');
       return;
@@ -35,11 +35,11 @@ const AddCategoryPopup = ({ show, onClose, onAddCategory }) => {
   return (
     <div className={`fixed inset-0 flex items-center justify-center z-50 ${show ? '' : 'hidden'}`}>
       <div className="absolute inset-0 bg-black opacity-50"></div>
-      <div className="relative bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
-        <h2 className="text-lg font-semibold mb-4">Add New Category</h2>
+      <div className="relative bg-pop-gradient rounded-lg shadow-lg p-6 max-w-sm w-full">
+        <h2 className="text-lg font-semibold mb-4 text-white">Add New Category</h2>
         <form>
           <div className="mb-4">
-            <label htmlFor="categoryName" className="block text-sm font-medium">
+            <label htmlFor="categoryName" className="block text-sm font-medium text-white">
               Category Name
             </label>
             <input
@@ -52,7 +52,7 @@ const AddCategoryPopup = ({ show, onClose, onAddCategory }) => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="color" className="block text-sm font-medium">
+            <label htmlFor="color" className="block text-sm font-medium text-white">
               Color
             </label>
             <input
@@ -66,7 +66,7 @@ const AddCategoryPopup = ({ show, onClose, onAddCategory }) => {
           <div className="flex justify-end">
             <button
               type="button"
-              className="bg-blue-500 text-white px-4 py-2 rounded mr-2 hover:bg-blue-600"
+              className="bg-note-gradient text-white px-4 py-2 rounded mr-2 hover:bg-black border border-blue-500"
               onClick={handleAddCategory}
             >
               Add

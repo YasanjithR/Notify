@@ -5,12 +5,13 @@ import AddNote from "../components/AddNote";
 import UpdateNote from "../components/UpdateNote";
 import CategoryFilter from "../components/Filter";
 import AddCategoryPopup from "../components/AddCategory";
+import FilteredNoteCard from "../components/FilteredNoteCard";
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-const Home = () => {
+const FilteredNotes = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showAddPopUp, setShowAddPopUp] = useState(false); // State for Add Note pop-up
   const [showUpdatePopup, setShowUpdatePopup] = useState(false); // State for Update Note pop-up
@@ -19,6 +20,11 @@ const Home = () => {
   const [noteId, setNoteId] = useState(null);
   
   const navigate = useNavigate();
+
+  const handleCategorySelect = (categoryId) => {
+    setSelectedCategory(categoryId);
+  };
+
 
   const handleAddCategory = async (newCategory) => {
     try {
@@ -34,11 +40,6 @@ const Home = () => {
       console.error("Error category note:", error.message);
     }
   };
-
-  const handleCategorySelect = (categoryId) => {
-    setSelectedCategory(categoryId);
-  };
-
 
   const handleFilter = (categoryName) => {
 
@@ -86,9 +87,9 @@ const Home = () => {
       )}
 
       <Search />
-      <CategoryFilter onClick={() => setAddShowCatPopup(true)} onCategorySelect={handleCategorySelect} />
+      <CategoryFilter onClick={() => setAddShowCatPopup(true)}  onCategorySelect={handleCategorySelect}/>
 
-      <NoteCard onClick={handleUpdateNote} selectedCategory={selectedCategory} />
+      <FilteredNoteCard onClick={handleUpdateNote} selectedCategory={selectedCategory}/>
 
       <AddCategoryPopup
         show={showAddCatPopup}
@@ -99,4 +100,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default FilteredNotes;

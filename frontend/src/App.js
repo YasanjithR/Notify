@@ -3,6 +3,7 @@ import './index.css';
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import Home from './pages/Home'
 import Preloader from './pages/Preloader';
+import FilteredNotes from './pages/FilteredNotes';
 function App() {
   return (
     <div className="App">
@@ -17,6 +18,17 @@ function App() {
             
             />
           </Routes>
+
+          <Routes>
+            <Route
+            
+            path="/FilteredNotes"
+            element={<FilteredNotes/>}
+            
+            />
+          </Routes>
+
+          
           
           </div>  
       </BrowserRouter>

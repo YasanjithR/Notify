@@ -51,11 +51,11 @@ const AddNote = ({ show, onClose, onCreateNote }) => {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div className="bg-white rounded-lg p-6 w-full sm:w-96">
+      <div className="bg-pop-gradient rounded-lg p-6 w-full sm:w-96">
     
-        <h2 className="text-xl font-semibold mb-4">Create New Note</h2>
+        <h2 className="text-xl font-semibold mb-4 text-white">Create New Note</h2>
         <div className="mb-4">
-          <label htmlFor="noteTitle" className="block text-sm font-medium">
+          <label htmlFor="noteTitle" className="block text-sm font-medium text-white">
             Note Title
           </label>
           <input
@@ -68,7 +68,7 @@ const AddNote = ({ show, onClose, onCreateNote }) => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="noteContent" className="block text-sm font-medium">
+          <label htmlFor="noteContent" className="block text-sm font-medium text-white">
             Note Content
           </label>
           <textarea
@@ -81,7 +81,7 @@ const AddNote = ({ show, onClose, onCreateNote }) => {
           ></textarea>
         </div>
         <div className="mb-4">
-          <label htmlFor="category" className="block text-sm font-medium">
+          <label htmlFor="category" className="block text-sm font-medium text-white">
             Category
           </label>
           <select
@@ -101,7 +101,7 @@ const AddNote = ({ show, onClose, onCreateNote }) => {
         <div className="flex justify-end">
           <button
             onClick={handleCreateNote}
-            className="bg-blue-500 text-white px-4 py-2 rounded mr-2 hover:bg-blue-600"
+            className="bg-note-gradient text-white px-4 py-2 rounded mr-2 hover:bg-black border border-blue-500"
           >
             Create Note
           </button>

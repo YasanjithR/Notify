@@ -19,6 +19,10 @@ body{
   background-image: linear-gradient(to right, #1d2d3b5c, #ffffff3b);
 }
 
+.bg-pop-gradient {
+  background-image: linear-gradient(to right, #28364257, #02020221);
+}
+
 
 .cursor {
   width: 6px;
