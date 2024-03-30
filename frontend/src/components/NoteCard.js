@@ -8,7 +8,7 @@ const NoteCard = ({ onClick }) => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await axios.get("https://notify-backends.vercel.app/note");
+        const response = await axios.get("http://localhost:8070/note");
         setNotes(response.data);
       } catch (error) {
         console.error("Error fetching notes:", error);
