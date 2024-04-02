@@ -8,7 +8,7 @@ const NoteCard = ({ onClick }) => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await axios.get("https://notify-j6ik.onrender.com:8070/note");
+        const response = await axios.get("https://notify-j6ik.onrender.com/note");
         setNotes(response.data);
       } catch (error) {
         console.error("Error fetching notes:", error);
@@ -20,7 +20,7 @@ const NoteCard = ({ onClick }) => {
 
   const handleDelete = async (noteId) => {
     try {
-      await axios.delete(`https://notify-j6ik.onrender.com:8070/note/delete/${noteId}`);
+      await axios.delete(`https://notify-j6ik.onrender.com/note/delete/${noteId}`);
       setNotes(notes.filter((note) => note._id !== noteId));
       console.log("Note deleted successfully");
     } catch (error) {

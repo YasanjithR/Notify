@@ -28,7 +28,7 @@ const FilteredNotes = () => {
   const handleAddCategory = async (newCategory) => {
     try {
       const response = await axios.post(
-        "https://notify-j6ik.onrender.com:8070/category/new",
+        "https://notify-j6ik.onrender.com/category/new",
         newCategory
       );
 
@@ -48,7 +48,7 @@ const FilteredNotes = () => {
   const handleCreateNote = async (newNoteData) => {
     try {
       const response = await axios.post(
-        "https://notify-j6ik.onrender.com:8070/note/new",
+        "https://notify-j6ik.onrender.com/note/new",
         newNoteData
       );
       navigate("/home");
