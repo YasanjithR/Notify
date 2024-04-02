@@ -16,8 +16,8 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
     const fetchNoteDetails = async () => {
       try {
         const [noteResponse, categoriesResponse] = await Promise.all([
-          axios.get(`http://localhost:8070/note/${noteId}`),
-          axios.get(`http://localhost:8070/category`),
+          axios.get(`https://notify-j6ik.onrender.com:8070/note/${noteId}`),
+          axios.get(`https://notify-j6ik.onrender.com:8070/category`),
         ]);
         setNoteDetails(noteResponse.data);
         setCategories(categoriesResponse.data);
@@ -49,7 +49,7 @@ const UpdateNote = ({ show, onClose, onUpdateNote, noteId }) => {
 
     try {
       await axios.patch(
-        `http://localhost:8070/note/update/${noteId}`,
+        `https://notify-j6ik.onrender.com:8070/note/update/${noteId}`,
         noteDetails
       );
       onUpdateNote();

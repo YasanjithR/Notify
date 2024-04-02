@@ -12,7 +12,7 @@ const FilteredNoteCard = ({ onClick, selectedCategory }) => {
     const fetchNotesByCategory = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8070/note/category/${selectedCategory}`
+          `https://notify-j6ik.onrender.com:8070/note/category/${selectedCategory}`
         );
         setNotes(response.data);
       } catch (error) {
@@ -27,7 +27,7 @@ const FilteredNoteCard = ({ onClick, selectedCategory }) => {
 
   const handleDelete = async (noteId) => {
     try {
-      await axios.delete(`http://localhost:8070/note/delete/${noteId}`);
+      await axios.delete(`https://notify-j6ik.onrender.com:8070/note/delete/${noteId}`);
       setNotes(notes.filter((note) => note._id !== noteId));
       navigate("/home");
       console.log("Note deleted successfully");
