@@ -18,6 +18,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use('/category',categoryRoutes)
 app.use('/note',noteRoute)
+app.use('/',res.json({"Error"})
 
 
 const URL = process.env.MONGO_URI;
