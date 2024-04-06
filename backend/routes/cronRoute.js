@@ -1,7 +1,9 @@
-const express= require('express')
-const cron = require('../controllers/cronController')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
-router.get('/',cron)
 
-module.exports = router
+router.get('/', (req, res) => {
+  res.json('Cron test');
+});
+
+module.exports = router;
