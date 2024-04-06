@@ -5,6 +5,7 @@ const cors = require("cors");
 const Category = require('./models/Category')
 const categoryRoutes = require('./routes/category')
 const noteRoute = require('./routes/noteRoutes')
+const cronRoute = require('./routes/cronRoute')
 
 const app = express();
 require("dotenv").config();
@@ -18,6 +19,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use('/category',categoryRoutes)
 app.use('/note',noteRoute)
+app.use('/cron',cronRoute)
 
 
 const URL = process.env.MONGO_URI;
