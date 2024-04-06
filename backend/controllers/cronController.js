@@ -1,7 +1,7 @@
 const cron = async=>{
 
 
-    res.json("Success")
+    res.status.json({msg:"Hello"})
 
 }
 
